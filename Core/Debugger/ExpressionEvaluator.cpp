@@ -149,6 +149,8 @@ int64_t ExpressionEvaluator::ProcessSharedTokens(string token)
 		return EvalValues::IsDummy;
 	} else if(token == "oppc") {
 		return EvalValues::OpProgramCounter;
+	} else if(token == "opinst") {
+		return EvalValues::OpInstruction;
 	}
 	return -1;
 }
@@ -409,6 +411,9 @@ int64_t ExpressionEvaluator::Evaluate(ExpressionData& data, EvalResultType& resu
 					case EvalValues::IsDma: token = operationInfo.Type == MemoryOperationType::DmaRead || operationInfo.Type == MemoryOperationType::DmaWrite; break;
 					case EvalValues::IsDummy: token = operationInfo.Type == MemoryOperationType::DummyRead || operationInfo.Type == MemoryOperationType::DummyWrite; break;
 					case EvalValues::OpProgramCounter: token = _cpuDebugger->GetProgramCounter(true); break;
+					case EvalValues::OpInstruction:
+						token = _cpuDebugger ? _debugger->GetMemoryDumper()->GetMemoryValue(_cpuMemory, _cpuDebugger->GetProgramCounter(true)) : 0;
+						break;
 
 					default:
 						if(!_cpuDebugger) {

@@ -148,6 +148,7 @@ enum EvalValues : int64_t
 	IsDma,
 	IsDummy,
 	OpProgramCounter,
+	OpInstruction,
 
 	RegPS_Carry,
 	RegPS_Zero,
