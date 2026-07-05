@@ -9,6 +9,15 @@ enum class SnesCpuStopState : uint8_t
 	WaitingForIrq = 2
 };
 
+enum class SnesCpuRegister : uint8_t
+{
+	A = 0,
+	X = 1,
+	Y = 2,
+	D = 3,
+	DB = 4
+};
+
 struct SnesCpuState : BaseState
 {
 	uint64_t CycleCount;
@@ -76,4 +85,3 @@ enum class SnesIrqSource
 	Ppu = 1,
 	Coprocessor = 2
 };
-

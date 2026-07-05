@@ -77,6 +77,7 @@ namespace Mesen.Interop
 				case MemoryType.SufamiTurboSecondCart:
 				case MemoryType.SufamiTurboSecondCartRam:
 				case MemoryType.SnesRegister:
+				case MemoryType.SnesCpuRegister:
 					return CpuType.Snes;
 
 				case MemoryType.PceMemory:
@@ -172,6 +173,7 @@ namespace Mesen.Interop
 		{
 			switch(memType) {
 				case MemoryType.SnesRegister:
+				case MemoryType.SnesCpuRegister:
 				case MemoryType.SmsPort:
 				case MemoryType.WsPort:
 					return false;
@@ -418,6 +420,7 @@ namespace Mesen.Interop
 		public static bool SupportsExecBreakpoints(this MemoryType memType)
 		{
 			switch(memType) {
+				case MemoryType.SnesCpuRegister:
 				case MemoryType.PceAdpcmRam:
 				case MemoryType.SmsPort:
 				case MemoryType.WsPort:
@@ -457,6 +460,7 @@ namespace Mesen.Interop
 				MemoryType.SnesSpriteRam => "OAM",
 				MemoryType.SnesCgRam => "CGRAM",
 				MemoryType.SnesRegister => "REG",
+				MemoryType.SnesCpuRegister => "CPU REG",
 
 				MemoryType.SpcRam => "RAM",
 				MemoryType.SpcRom => "ROM",
@@ -570,6 +574,10 @@ namespace Mesen.Interop
 
 		public static string GetFormatString(this MemoryType memType)
 		{
+			if(memType == MemoryType.SnesCpuRegister) {
+				return "X1";
+			}
+
 			//TODO performance
 			CpuType cpuType = memType.ToCpuType();
 			if(memType == cpuType.ToMemoryType()) {

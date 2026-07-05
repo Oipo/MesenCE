@@ -65,6 +65,7 @@ public:
 			case MemoryType::SufamiTurboSecondCart:
 			case MemoryType::SufamiTurboSecondCartRam:
 			case MemoryType::SnesRegister:
+			case MemoryType::SnesCpuRegister:
 				return CpuType::Snes;
 
 			case MemoryType::SpcMemory:
@@ -280,6 +281,7 @@ public:
 			case MemoryType::SufamiTurboSecondCartRam:
 			case MemoryType::PceSaveRam:
 			case MemoryType::SnesRegister:
+			case MemoryType::SnesCpuRegister:
 			case MemoryType::SmsCartRam:
 			case MemoryType::GbaSaveRam:
 			case MemoryType::WsCartRam:

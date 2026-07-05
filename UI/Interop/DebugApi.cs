@@ -685,6 +685,8 @@ namespace Mesen.Interop
 		WsInternalEeprom,
 		WsPort,
 
+		SnesCpuRegister,
+
 		None,
 	}
 

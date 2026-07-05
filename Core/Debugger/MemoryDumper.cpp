@@ -105,6 +105,7 @@ uint32_t MemoryDumper::GetMemorySize(MemoryType type)
 		case MemoryType::GbaMemory: return 0x10000000;
 		case MemoryType::WsMemory: return 0x100000;
 		case MemoryType::SnesRegister: return 0x10000;
+		case MemoryType::SnesCpuRegister: return 5;
 		case MemoryType::SmsPort: return 0x100;
 		case MemoryType::WsPort: return 0x10000;
 		default: return _emu->GetMemory(type).Size;

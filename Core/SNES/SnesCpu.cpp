@@ -11,6 +11,7 @@
 #include "SNES/SnesCpu.Shared.h"
 #include "Shared/EventType.h"
 #include "Shared/MemoryOperationType.h"
+#include "Shared/MemoryType.h"
 
 #ifndef DUMMYCPU
 SnesCpu::SnesCpu(SnesConsole* console)
@@ -24,6 +25,60 @@ SnesCpu::SnesCpu(SnesConsole* console)
 
 SnesCpu::~SnesCpu()
 {
+}
+
+void SnesCpu::ProcessRegisterRead(SnesCpuRegister reg, uint32_t value)
+{
+#ifndef DUMMYCPU
+	_emu->ProcessMemoryAccess<CpuType::Snes, MemoryType::SnesCpuRegister, MemoryOperationType::Read>((uint32_t)reg, value);
+#endif
+}
+
+void SnesCpu::ProcessRegisterWrite(SnesCpuRegister reg, uint32_t value)
+{
+#ifndef DUMMYCPU
+	_emu->ProcessMemoryAccess<CpuType::Snes, MemoryType::SnesCpuRegister, MemoryOperationType::Write>((uint32_t)reg, value);
+#endif
+}
+
+void SnesCpu::ProcessRegisterRead(uint16_t& reg)
+{
+	if(&reg == &_state.A) {
+		ProcessRegisterRead(SnesCpuRegister::A, reg);
+	} else if(&reg == &_state.X) {
+		ProcessRegisterRead(SnesCpuRegister::X, reg);
+	} else if(&reg == &_state.Y) {
+		ProcessRegisterRead(SnesCpuRegister::Y, reg);
+	} else if(&reg == &_state.D) {
+		ProcessRegisterRead(SnesCpuRegister::D, reg);
+	}
+}
+
+void SnesCpu::ProcessRegisterWrite(uint16_t& reg)
+{
+	if(&reg == &_state.A) {
+		ProcessRegisterWrite(SnesCpuRegister::A, reg);
+	} else if(&reg == &_state.X) {
+		ProcessRegisterWrite(SnesCpuRegister::X, reg);
+	} else if(&reg == &_state.Y) {
+		ProcessRegisterWrite(SnesCpuRegister::Y, reg);
+	} else if(&reg == &_state.D) {
+		ProcessRegisterWrite(SnesCpuRegister::D, reg);
+	}
+}
+
+void SnesCpu::ProcessRegisterRead(uint8_t& reg)
+{
+	if(&reg == &_state.DBR) {
+		ProcessRegisterRead(SnesCpuRegister::DB, reg);
+	}
+}
+
+void SnesCpu::ProcessRegisterWrite(uint8_t& reg)
+{
+	if(&reg == &_state.DBR) {
+		ProcessRegisterWrite(SnesCpuRegister::DB, reg);
+	}
 }
 
 void SnesCpu::Exec()

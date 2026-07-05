@@ -1265,6 +1265,9 @@ template void Debugger::ProcessMemoryAccess<CpuType::Pce, MemoryType::PceArcadeC
 template void Debugger::ProcessMemoryAccess<CpuType::Sms, MemoryType::SmsPort, MemoryOperationType::Write>(uint32_t addr, uint8_t& value);
 template void Debugger::ProcessMemoryAccess<CpuType::Sms, MemoryType::SmsPort, MemoryOperationType::Read>(uint32_t addr, uint8_t& value);
 
+template void Debugger::ProcessMemoryAccess<CpuType::Snes, MemoryType::SnesCpuRegister, MemoryOperationType::Write>(uint32_t addr, uint32_t& value);
+template void Debugger::ProcessMemoryAccess<CpuType::Snes, MemoryType::SnesCpuRegister, MemoryOperationType::Read>(uint32_t addr, uint32_t& value);
+
 template void Debugger::ProcessMemoryAccess<CpuType::Ws, MemoryType::WsPort, MemoryOperationType::Write>(uint32_t addr, uint8_t& value);
 template void Debugger::ProcessMemoryAccess<CpuType::Ws, MemoryType::WsPort, MemoryOperationType::Read>(uint32_t addr, uint8_t& value);
 template void Debugger::ProcessMemoryAccess<CpuType::Ws, MemoryType::WsPort, MemoryOperationType::Write>(uint32_t addr, uint16_t& value);

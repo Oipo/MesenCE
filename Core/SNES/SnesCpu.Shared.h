@@ -375,6 +375,7 @@ uint32_t SnesCpu::GetProgramAddress(uint16_t addr)
 
 uint32_t SnesCpu::GetDataAddress(uint16_t addr)
 {
+	ProcessRegisterRead(SnesCpuRegister::DB, _state.DBR);
 	return (_state.DBR << 16) | addr;
 }
 
@@ -507,6 +508,7 @@ uint16_t SnesCpu::PopWord(bool allowEmulationMode)
 
 uint16_t SnesCpu::GetDirectAddress(uint16_t offset, bool allowEmulationMode)
 {
+	ProcessRegisterRead(SnesCpuRegister::D, _state.D);
 	if(allowEmulationMode && _state.EmulationMode && (_state.D & 0xFF) == 0) {
 		return (uint16_t)((_state.D & 0xFF00) | (offset & 0xFF));
 	} else {
@@ -570,6 +572,8 @@ void SnesCpu::SetPS(uint8_t ps)
 		//Truncate X/Y when 8-bit indexes are enabled
 		_state.Y &= 0xFF;
 		_state.X &= 0xFF;
+		ProcessRegisterWrite(SnesCpuRegister::Y, _state.Y);
+		ProcessRegisterWrite(SnesCpuRegister::X, _state.X);
 	}
 }
 
@@ -577,6 +581,7 @@ void SnesCpu::SetRegister(uint8_t& reg, uint8_t value)
 {
 	SetZeroNegativeFlags(value);
 	reg = value;
+	ProcessRegisterWrite(reg);
 }
 
 void SnesCpu::SetRegister(uint16_t& reg, uint16_t value, bool eightBitMode)
@@ -588,6 +593,7 @@ void SnesCpu::SetRegister(uint16_t& reg, uint16_t value, bool eightBitMode)
 		SetZeroNegativeFlags(value);
 		reg = value;
 	}
+	ProcessRegisterWrite(reg);
 }
 
 void SnesCpu::SetZeroNegativeFlags(uint16_t value)

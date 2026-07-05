@@ -58,6 +58,12 @@ private:
 	uint16_t GetResetVector();
 
 	void ProcessCpuCycle();
+	void ProcessRegisterRead(SnesCpuRegister reg, uint32_t value);
+	void ProcessRegisterWrite(SnesCpuRegister reg, uint32_t value);
+	void ProcessRegisterRead(uint16_t& reg);
+	void ProcessRegisterWrite(uint16_t& reg);
+	void ProcessRegisterRead(uint8_t& reg);
+	void ProcessRegisterWrite(uint8_t& reg);
 
 	void Idle();
 	void IdleOrDummyWrite(uint32_t addr, uint8_t value);
@@ -157,7 +163,7 @@ private:
 	void IncDec(int8_t offset);
 
 	//Compare instructions
-	void Compare(uint16_t reg, bool eightBitMode);
+	void Compare(uint16_t& reg, bool eightBitMode);
 	void CMP();
 	void CPX();
 	void CPY();
@@ -222,7 +228,7 @@ private:
 	void PLX();
 	void PLY();
 
-	void PushRegister(uint16_t reg, bool eightBitMode);
+	void PushRegister(uint16_t& reg, bool eightBitMode);
 	void PullRegister(uint16_t& reg, bool eightBitMode);
 
 	//Store/load instructions

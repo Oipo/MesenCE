@@ -23,6 +23,38 @@ Sa1Cpu::~Sa1Cpu()
 {
 }
 
+void Sa1Cpu::ProcessRegisterRead(SnesCpuRegister reg, uint32_t value)
+{
+	(void)reg;
+	(void)value;
+}
+
+void Sa1Cpu::ProcessRegisterWrite(SnesCpuRegister reg, uint32_t value)
+{
+	(void)reg;
+	(void)value;
+}
+
+void Sa1Cpu::ProcessRegisterRead(uint16_t& reg)
+{
+	(void)reg;
+}
+
+void Sa1Cpu::ProcessRegisterWrite(uint16_t& reg)
+{
+	(void)reg;
+}
+
+void Sa1Cpu::ProcessRegisterRead(uint8_t& reg)
+{
+	(void)reg;
+}
+
+void Sa1Cpu::ProcessRegisterWrite(uint8_t& reg)
+{
+	(void)reg;
+}
+
 void Sa1Cpu::Exec()
 {
 	_immediateMode = false;

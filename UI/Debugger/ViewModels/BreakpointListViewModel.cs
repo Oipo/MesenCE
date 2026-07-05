@@ -162,7 +162,7 @@ namespace Mesen.Debugger.ViewModels
 				new ContextMenuAction() {
 					ActionType = ActionType.ViewInMemoryViewer,
 					Shortcut = () => ConfigManager.Config.Debug.Shortcuts.Get(DebuggerShortcut.BreakpointList_ViewInMemoryViewer),
-					IsEnabled = () => Selection.SelectedItems.Count == 1,
+					IsEnabled = () => Selection.SelectedItems.Count == 1 && Selection.SelectedItem?.Breakpoint.MemoryType.SupportsMemoryViewer() == true,
 					OnClick = () => {
 						if(Selection.SelectedItem is BreakpointViewModel vm) {
 							MemoryToolsWindow.ShowInMemoryTools(vm.Breakpoint.MemoryType, (int)vm.Breakpoint.StartAddress);

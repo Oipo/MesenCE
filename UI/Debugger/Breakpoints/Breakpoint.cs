@@ -110,6 +110,12 @@ namespace Mesen.Debugger
 
 		public string GetAddressString(bool showLabel)
 		{
+			if(MemoryType == MemoryType.SnesCpuRegister) {
+				string start = GetSnesCpuRegisterName(StartAddress);
+				string end = GetSnesCpuRegisterName(EndAddress);
+				return StartAddress == EndAddress ? start : $"{start} - {end}";
+			}
+
 			string addr = "";
 			string format = MemoryType.GetFormatString();
 			if(StartAddress == EndAddress) {
@@ -125,6 +131,18 @@ namespace Mesen.Debugger
 				}
 			}
 			return addr;
+		}
+
+		private static string GetSnesCpuRegisterName(UInt32 address)
+		{
+			return address switch {
+				0 => "A",
+				1 => "X",
+				2 => "Y",
+				3 => "D",
+				4 => "DB",
+				_ => "$" + address.ToString("X1")
+			};
 		}
 
 		public string GetAddressLabel()

@@ -102,5 +102,7 @@ enum class MemoryType
 	WsInternalEeprom,
 	WsPort,
 
+	SnesCpuRegister,
+
 	None
 };

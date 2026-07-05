@@ -53,6 +53,7 @@ namespace Mesen.Debugger.Utilities
 				addRow(" ");
 				addBoldRow("Other values");
 				addRow("  OpPc: Program counter of the first byte of the current instruction");
+				addRow("  OpInst: the first byte of the current instruction, use to only break on specific instructions");
 				addRow("  Address: CPU memory address being read/written");
 				addRow("  MemAddress: RAM or ROM address (byte offset) being read/written (-1 if not mapped to RAM/ROM)");
 				addRow("  Value: Value being read/written");
@@ -68,6 +69,10 @@ namespace Mesen.Debugger.Utilities
 			addRow("  {<address>} - 16-bit memory value at <address>");
 			addRow("  #<address> - 32-bit memory value at <address>");
 			addRow("  :<address> - Returns the ROM/RAM address for the specified CPU address");
+
+			addRow(" ");
+			addBoldRow("Breaking on register reads/writes");
+			addRow("  A = 0, X = 1, Y = 2, D = 3, DB = 4");
 
 			addRow(" ");
 			addBoldRow("Examples");
